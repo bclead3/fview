@@ -20,7 +20,7 @@
               function(data, status){
                   var output_string = '<ul>'
                   $.each(data, function(index ,value){
-
+                      output_string += value.site_name
                       $.each(value, function(key, val){
                           output_string += "<li>" + key + ":" + val + "</li>"
                       })
