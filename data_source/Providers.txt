@@ -1,0 +1,15 @@
+Provider	& email address
+---------------------------------
+AT&T	@txt.att.net 
+Sprint	@messaging.sprintpcs.com
+T-Mobile	@tmomail.net
+Verizon	@vtext.com
+Virgin	@vmobl.com
+Nextel	@messaging.nextel.com
+Cingular	@cingularme.com
+Boost	@myboostmobile.com
+Alltel	@text.wireless.alltel.com
+Criket	@sms.mycricket.com
+US-Cellular	@email.uscc.net
+onpage	@onpage.com
+American	@pager.myairmail.com

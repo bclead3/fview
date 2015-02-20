@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Site num:</strong>
+  <%= @site.site_num %>
+</p>
+
+<p>
+  <strong>Site name:</strong>
+  <%= @site.site_name %>
+</p>
+
+<p>
+  <strong>Telephone num:</strong>
+  <%= @site.telephone_num %>
+</p>
+
+<%= link_to 'Edit', edit_site_path(@site) %> |
+<%= link_to 'Back', sites_path %>
