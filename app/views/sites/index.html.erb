@@ -18,12 +18,15 @@
                   chars: content
               },
               function(data, status){
+                  var output_string = '<ul>'
                   $.each(data, function(index ,value){
+
                       $.each(value, function(key, val){
-                          $('#result').text(key+":"+val)
-                          console.log(key + ':'+ val)
+                          output_string += "<li>" + key + ":" + val + "</li>"
                       })
                   })
+                  output_string += '</ul>'
+                  $('#result').html( output_string )
               })
   })
 </script>

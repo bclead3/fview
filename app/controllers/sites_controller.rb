@@ -24,8 +24,6 @@ class SitesController < ApplicationController
   def get_by_chars
       chars = params['chars']
       @site_array = Reports::SiteReport.get_site_from_chars(chars)
-      puts @site_array.inspect
-      @site_array
   end
 
   # POST /sites
