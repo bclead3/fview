@@ -1,31 +1,29 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Sites</h1>
+<form action="get_by_chars">
+  Type the site name:<input class='t_input' type="text" name="site">
+</form>
 
-<table>
-  <thead>
-    <tr>
-      <th>Site num</th>
-      <th>Site name</th>
-      <th>Telephone num</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sites.each do |site| %>
-      <tr>
-        <td><%= site.site_num %></td>
-        <td><%= site.site_name %></td>
-        <td><%= site.telephone_num %></td>
-        <td><%= link_to 'Show', site %></td>
-        <td><%= link_to 'Edit', edit_site_path(site) %></td>
-        <td><%= link_to 'Destroy', site, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
+<p id="result"></p>
 <br>
 
 <%= link_to 'New Site', new_site_path %>
+
+<script>
+  $('.t_input').keyup(function(){
+      var content = $('.t_input').val()
+      $('#result').text(content)
+      $.post('sites/get_by_chars',
+              {
+                  chars: content
+              },
+              function(data, status){
+                  $.each(data, function(index ,value){
+                      $.each(value, function(key, val){
+                          $('#result').text(key+":"+val)
+                          console.log(key + ':'+ val)
+                      })
+                  })
+              })
+  })
+</script>
