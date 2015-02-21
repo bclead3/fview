@@ -12,21 +12,37 @@
 <script>
   $('.t_input').keyup(function(){
       var content = $('.t_input').val()
-      $('#result').text(content)
-      $.post('sites/get_by_chars',
+      if (content.length > 0){
+          $.post('sites/get_by_chars',
               {
                   chars: content
               },
               function(data, status){
-                  var output_string = '<ul>'
-                  $.each(data, function(index ,value){
-                      output_string += value.site_name
-                      $.each(value, function(key, val){
-                          output_string += "<li>" + key + ":" + val + "</li>"
+                  if (data.length === 1) {
+                      var output_string
+                      output_string = '<ul>'
+                      $.each(data, function (index, value) {
+                          output_string += value.site_name
+                          $.each(value, function (key, val) {
+                              output_string += "<li>" + key + ":" + val + "</li>"
+                          })
                       })
-                  })
-                  output_string += '</ul>'
-                  $('#result').html( output_string )
+                      output_string += '</ul>'
+                      $('#result').html(output_string)
+                  }else if (data.length > 1) {
+                      var output_string
+                      output_string = '<ul>'
+                      $.each(data, function (index, value) {
+                          output_string += '<li>'+value.site_name+'</li>'
+                      })
+                      output_string += '</ul>'
+                      $('#result').html(output_string)
+                  }else{
+                      $('#result').html('<span></span>')
+                  }
               })
+      }else{
+          $('#result').html('<span></span>')
+      }
   })
 </script>
