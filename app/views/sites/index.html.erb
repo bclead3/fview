@@ -1,48 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<form action="get_by_chars">
-  Type the site name:<input class='t_input' type="text" name="site">
-</form>
+<div class='form_input'>
+  <form action="get_by_chars">
+    Type the pharmacy name: <input class='t_input' type="text" name="site">
+  </form>
+</div>
 
 <p id="result"></p>
 <br>
 
-<%= link_to 'New Site', new_site_path %>
-
-<script>
-  $('.t_input').keyup(function(){
-      var content = $('.t_input').val()
-      if (content.length > 0){
-          $.post('sites/get_by_chars',
-              {
-                  chars: content
-              },
-              function(data, status){
-                  if (data.length === 1) {
-                      var output_string
-                      output_string = '<ul>'
-                      $.each(data, function (index, value) {
-                          output_string += value.site_name
-                          $.each(value, function (key, val) {
-                              output_string += "<li>" + key + ":" + val + "</li>"
-                          })
-                      })
-                      output_string += '</ul>'
-                      $('#result').html(output_string)
-                  }else if (data.length > 1) {
-                      var output_string
-                      output_string = '<ul>'
-                      $.each(data, function (index, value) {
-                          output_string += '<li>'+value.site_name+'</li>'
-                      })
-                      output_string += '</ul>'
-                      $('#result').html(output_string)
-                  }else{
-                      $('#result').html('<span></span>')
-                  }
-              })
-      }else{
-          $('#result').html('<span></span>')
-      }
-  })
-</script>
+<%- link_to 'New Site', new_site_path %>

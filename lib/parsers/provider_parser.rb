@@ -1,19 +1,27 @@
 module Parsers
     class ProviderParser
 
-        def self.process(filename = "#{Rails.root}/data_source/Providers.txt")
+        def self.process(filename = File.join(Rails.root,'config','sms_fu.yml') )
             puts "the filename is:#{filename}"
             if File.exists?(filename)
-                content = File.open(filename) {|f| f.read }
-            else
-
+                content = YAML.load_file(filename)
             end
-            arr = content.split("\r\n")
 
-            transform_array(arr)
+            process_hash_to_array(content)
         end
 
         private
+
+        def self.process_hash_to_array(hash)
+            new_array = []
+            hash['carriers'].each do |key, value|
+                carrier_name    = key
+                full_name       = value['name']
+                carrier_postfix = value['value']
+                new_array << [carrier_name, full_name, carrier_postfix]
+            end
+            new_array
+        end
 
         def self.transform_array(array)
             new_array = []

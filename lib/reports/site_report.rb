@@ -2,7 +2,12 @@ module Reports
     class SiteReport
 
         def self.get_site_from_chars(chars)
-            SITE_ARRAY.select{|el| /^#{chars}/i.match( el[1] ) }
+            if /\d/.match(chars)
+                SITE_ARRAY.select{|el| /^#{chars}/i.match( el[0].to_s ) }
+            else
+                SITE_ARRAY.select{|el| /^#{chars}/i.match( el[1] ) }
+            end
+
         end
 
         def self.get_array_of_sites
