@@ -29,6 +29,10 @@ class SitesController < ApplicationController
         @site_array = Reports::SiteReport.get_site_from_chars(chars)
     end
 
+    def send_request_message
+
+    end
+
     # POST /sites
     # POST /sites.json
     def create

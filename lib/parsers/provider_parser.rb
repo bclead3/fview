@@ -1,7 +1,7 @@
 module Parsers
     class ProviderParser
 
-        def self.process(filename = File.join(Rails.root,'config','sms_fu.yml') )
+        def self.process(filename = File.join(Rails.root, 'lib', 'assets', 'sms_fu.yml') )
             puts "the filename is:#{filename}"
             if File.exists?(filename)
                 content = YAML.load_file(filename)

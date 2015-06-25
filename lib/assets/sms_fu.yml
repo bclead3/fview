@@ -76,7 +76,7 @@ carriers:
     value: '@vtext.com'
   virgin:
     name: Virgin Mobile
-    value: '@vmobl.net'
+    value: '@vmobl.com'
   # International Carriers
 #  aliant-canada:
 #    name: Aliant (Canada)
