@@ -10,6 +10,11 @@ module Utils
                 provider.save!
                 puts provider.inspect
             end
+
+            site_array = Parsers::SiteParser.process
+            site_array.each do |site|
+                puts "#{site.site_num.to_s.ljust(4,' ')}#{site.site_name.ljust(35,' ')}#{site.telephone_num}"
+            end
         end
     end
 end

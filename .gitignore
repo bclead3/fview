@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
+/log
 !/log/.keep
 /tmp
 /db/*.sqlite3
@@ -18,3 +18,4 @@
 
 .idea
 /nbproject
+
