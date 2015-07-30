@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   resource :sites do
     member do
       post :get_by_chars
+      post :increment
+      post :decrement
     end
   end
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

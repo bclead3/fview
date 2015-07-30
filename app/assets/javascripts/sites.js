@@ -1,5 +1,14 @@
 $( document ).ready(function() {
 
+    $('.b_input').click( function(){
+        $.post('sites/increment',
+            function(data, status){
+                var output_string = data[0].increment_var
+                $('#result').text(output_string)
+            }
+        )
+    })
+
     $('.t_input').keyup(function () {
         $('#TextBoxDiv2').remove()
         $('#textbox2').remove()

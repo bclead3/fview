@@ -29,6 +29,14 @@ class SitesController < ApplicationController
         @site_array = Reports::SiteReport.get_site_from_chars(chars)
     end
 
+    def increment
+        @increment_var = Incrementers::RequestIncrementer.new.increment
+    end
+
+    def decrement
+        @decrement_var = Incrementers::RequestIncrementer.new.decrement
+    end
+
     def send_request_message
 
     end
