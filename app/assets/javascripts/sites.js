@@ -10,8 +10,6 @@ $( document ).ready(function() {
     })
 
     $('.t_input').keyup(function () {
-        //$('#TextBoxDiv2').remove()
-        //$('#textbox2').remove()
         var content = $('.t_input').val()
         if (content.length > 0) {
             $.post('sites/get_by_chars',
@@ -26,14 +24,11 @@ $( document ).ready(function() {
                             $('#result').text(output_string)
                             $('#result').after(newTextBoxDiv)
 
-                            newTextBoxDiv.after().html('<label>Enter Phone #:</label>' +
-                            '<input type="text" class="text_input_1" name="textbox1" id="textbox1" value="" >' +
-                            '<label class="grey-label" id="char-counter"></label>')
                             $('#result').html(output_string)
                         }else{
                             output_string = "<p>"+data[0].site_name+" " + data[0].telephone_num + "</p>"
                             $('#result').html(output_string)
-                            $('#TextBoxDiv1').remove()
+                            $('#TextBoxDiv1').hide()
                         }
 
                     } else if (data.length > 1) {
@@ -44,34 +39,76 @@ $( document ).ready(function() {
                         })
                         output_string += '</ul>'
                         $('#result').html(output_string)
-                        $('#TextBoxDiv1').remove()
+                        $('#TextBoxDiv1').hide()
                     } else {
                         $('#result').html('<span></span>')
-                        $('#TextBoxDiv1').remove()
+                        $('#TextBoxDiv1').hide()
                     }
                 })
         } else {
             $('#result').html('<span></span>')
-            $('#TextBoxDiv1').remove()
+            $('#TextBoxDiv1').hide()
         }
+    })
+
+    $( '#dialog' ).dialog({
+        autoOpen: false,
+        modal: true,
+        buttons:{
+            OK: function() {
+                callMailer()
+                $(this).dialog('close')
+            },
+            Change: function() { $(this).dialog('close') }
+        },
+        title: 'Confirm phone and message...',
+        position:{
+            my: 'center',
+            at: 'center'
+        }
+    });
+    $( '#sendbtn1').click( function(){
+        var phone_value = $('#textbox1').val()
+        var message_val = $('#textbox2').val()
+        $('#phone-val').text( phone_value )
+        $('#msg-val').text( message_val )
+        $('#dialog').dialog( 'open' )
     })
 })
 
-//$(document).on( 'keyup', '.text_input_1', function () {
-//    var content = $('#textbox1').val()
-//    if (content.match(/\d{3}(.)?\d{3}(.)?\d{4}/)){
-//        var newTextBoxDiv = $(document.createElement('div')).attr("id", 'TextBoxDiv2')
-//        $('#TextBoxDiv1').after(newTextBoxDiv)
-//        new_input_box_string = '<label>Enter problem in 100 characters or less:</label>' +
-//                                '<input type="text" name="textbox2" id="textbox2" value="" size="100">'
-//        newTextBoxDiv.after().html(new_input_box_string)
-//    }else{
-//        $('#TextBoxDiv2').remove()
-//    }
-//})
+$(document).on( 'keyup', '.text_input_1', function () {
+    var content = $('#textbox1').val()
+    if (content.match(/\d{3}(.)?\d{3}(.)?\d{4}/)){
+        $('#TextBoxDiv2').show()
+    }else{
+        $('#TextBoxDiv2').hide()
+    }
+})
 
 $(document).on( 'keyup', '#textbox2', function () {
     var content = $('#textbox2').val()
-    var content_size = content.length
-    $('#char-counter').text( content_size )
+    var content_length_left = 100 - content.length
+    if (content_length_left > 0){
+        $('#char-counter').text( content_length_left )
+    }else if (content_length_left === 0){
+        $('#char-counter').text( 0 )
+    }else{
+        $('#char-counter').text( 0 )
+        $('#textbox2').val(content.substring(0,100))
+    }
 })
+
+function callMailer(){
+    var phVal = $('#textbox1').val()
+    var msgVal = $('#textbox2').val()
+    $.post('sites/send_request_message',
+        {
+            phone: phVal,
+            message: msgVal
+        },
+        function(data, status){
+            var output_string = data.increment
+            $('#result').text(output_string)
+        }
+    )
+}

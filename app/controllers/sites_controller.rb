@@ -29,16 +29,19 @@ class SitesController < ApplicationController
         @site_array = Reports::SiteReport.get_site_from_chars(chars)
     end
 
+    def send_request_message
+        phone_value     = params['phone']
+        message_value   = params['message']
+        puts "Ph:#{phone_value}    msg:#{message_value}"
+        increment
+    end
+
     def increment
         @increment_var = Incrementers::RequestIncrementer.new.increment
     end
 
     def decrement
         @decrement_var = Incrementers::RequestIncrementer.new.decrement
-    end
-
-    def send_request_message
-
     end
 
     # POST /sites

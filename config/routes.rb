@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post :get_by_chars
       post :increment
       post :decrement
+      post :send_request_message
     end
   end
 
