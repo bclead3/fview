@@ -10,8 +10,8 @@ $( document ).ready(function() {
     })
 
     $('.t_input').keyup(function () {
-        $('#TextBoxDiv2').remove()
-        $('#textbox2').remove()
+        //$('#TextBoxDiv2').remove()
+        //$('#textbox2').remove()
         var content = $('.t_input').val()
         if (content.length > 0) {
             $.post('sites/get_by_chars',
@@ -22,7 +22,7 @@ $( document ).ready(function() {
                     if (data.length === 1) {
                         var output_string = data[0].site_name
                         if (data[0].telephone_num === null){
-                            var newTextBoxDiv = $(document.createElement('div')).attr("id", 'TextBoxDiv1')
+                            var newTextBoxDiv = $('#TextBoxDiv1').show()
                             $('#result').text(output_string)
                             $('#result').after(newTextBoxDiv)
 
@@ -57,18 +57,18 @@ $( document ).ready(function() {
     })
 })
 
-$(document).on( 'keyup', '.text_input_1', function () {
-    var content = $('#textbox1').val()
-    if (content.match(/\d{3}(.)?\d{3}(.)?\d{4}/)){
-        var newTextBoxDiv = $(document.createElement('div')).attr("id", 'TextBoxDiv2')
-        $('#TextBoxDiv1').after(newTextBoxDiv)
-        new_input_box_string = '<label>Enter problem in 100 characters or less:</label>' +
-                                '<input type="text" name="textbox2" id="textbox2" value="" size="100">'
-        newTextBoxDiv.after().html(new_input_box_string)
-    }else{
-        $('#TextBoxDiv2').remove()
-    }
-})
+//$(document).on( 'keyup', '.text_input_1', function () {
+//    var content = $('#textbox1').val()
+//    if (content.match(/\d{3}(.)?\d{3}(.)?\d{4}/)){
+//        var newTextBoxDiv = $(document.createElement('div')).attr("id", 'TextBoxDiv2')
+//        $('#TextBoxDiv1').after(newTextBoxDiv)
+//        new_input_box_string = '<label>Enter problem in 100 characters or less:</label>' +
+//                                '<input type="text" name="textbox2" id="textbox2" value="" size="100">'
+//        newTextBoxDiv.after().html(new_input_box_string)
+//    }else{
+//        $('#TextBoxDiv2').remove()
+//    }
+//})
 
 $(document).on( 'keyup', '#textbox2', function () {
     var content = $('#textbox2').val()
