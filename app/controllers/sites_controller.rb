@@ -26,7 +26,11 @@ class SitesController < ApplicationController
     def get_by_chars
         chars = params['chars']
         logger.debug "received an input of #{params['chars']}"
-        @site_array = Reports::SiteReport.get_site_from_chars(chars)
+        if /(\d{3}|\D+)/.match( chars )
+            @site_array = Reports::SiteReport.get_site_from_chars(chars)
+        else
+            @site_array = []
+        end
     end
 
     def send_request_message
@@ -76,13 +80,13 @@ class SitesController < ApplicationController
 
     # DELETE /sites/1
     # DELETE /sites/1.json
-    def destroy
-        @site.destroy
-        respond_to do |format|
-            format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
-            format.json { head :no_content }
-        end
-    end
+    # def destroy
+    #     @site.destroy
+    #     respond_to do |format|
+    #         format.html { redirect_to sites_url, notice: 'Site was successfully destroyed.' }
+    #         format.json { head :no_content }
+    #     end
+    # end
 
     private
     # Use callbacks to share common setup or constraints between actions.

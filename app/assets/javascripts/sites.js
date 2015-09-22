@@ -26,7 +26,7 @@ $( document ).ready(function() {
 
                             $('#result').html(output_string)
                         }else{
-                            output_string = "<p>"+data[0].site_name+" " + data[0].telephone_num + "</p>"
+                            output_string = "<p class='single_site'>"+data[0].site_name+" " + data[0].telephone_num + "</p>"
                             $('#result').html(output_string)
                             $('#TextBoxDiv1').hide()
                         }
@@ -68,8 +68,11 @@ $( document ).ready(function() {
         }
     });
     $( '#sendbtn1').click( function(){
-        var phone_value = $('#textbox1').val()
+        var phone_temp  = $('#textbox1').val()
+        var myRegEx     = new RegExp(/.*(\d{3}).*(\d{3}).*(\d{4})/)
+        var matchArr    = myRegEx.exec( phone_temp )
         var message_val = $('#textbox2').val()
+        var phone_value = matchArr[1] + matchArr[2] + matchArr[3]
         $('#phone-val').text( phone_value )
         $('#msg-val').text( message_val )
         $('#dialog').dialog( 'open' )
@@ -77,11 +80,12 @@ $( document ).ready(function() {
 })
 
 $(document).on( 'keyup', '.text_input_1', function () {
-    var content = $('#textbox1').val()
-    if (content.match(/\d{3}(.)?\d{3}(.)?\d{4}/)){
+    var content = checkPhoneNumber( $('#textbox1').val() )
+    if ( content ){
         $('#TextBoxDiv2').show()
     }else{
         $('#TextBoxDiv2').hide()
+        $('#TextBoxDiv3').hide()
     }
 })
 
@@ -99,7 +103,7 @@ $(document).on( 'keyup', '#textbox2', function () {
 })
 
 function callMailer(){
-    var phVal = $('#textbox1').val()
+    var phVal = checkPhoneNumber( $('#textbox1').val() )
     var msgVal = $('#textbox2').val()
     $.post('sites/send_request_message',
         {
@@ -107,8 +111,19 @@ function callMailer(){
             message: msgVal
         },
         function(data, status){
-            var output_string = data.increment
+            var value_string = data.increment
+            $('#TextBoxDiv1').hide()
+            $('#TextBoxDiv2').hide()
+            var output_string = "Thank you, your message has been sent. Reference #"+value_string
             $('#result').text(output_string)
         }
     )
+}
+
+function checkPhoneNumber( possibleValue ){
+    var myRegEx     = new RegExp(/.*(\d{3}).*(\d{3}).*(\d{4})/)
+    var matchArr    = myRegEx.exec( possibleValue )
+    if ( matchArr ){
+        return matchArr[1] + matchArr[2] + matchArr[3]
+    }
 }
