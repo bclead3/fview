@@ -1,4 +1,5 @@
 require 'erb'
+require 'utils/os'
 
 module FView
     module Config
@@ -21,6 +22,10 @@ module FView
         def self.get_base_name( str )
             match_obj = /((\w*)(\.yml))/.match( str )
             match_obj[2]
+        end
+
+        def self.read_config_by_key_value( key_for_yaml, file_name )
+            FView::Config.read_config[key_for_yaml.to_sym][Rails.env][file_name][Utils::OS.get_platform]
         end
     end
 end

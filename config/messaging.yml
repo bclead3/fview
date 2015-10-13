@@ -1,0 +1,9 @@
+development:
+  all_team_pager_addresses_file_path:
+    osx: data_source/AllTeamPagerAddresses.txt
+    windows:
+    linux:
+  on_call_person_file_path:
+    osx: data_source/OnCallPerson.txt
+    windows:
+    linux:

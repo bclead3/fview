@@ -1,5 +1,5 @@
 require 'parsers/read_config'
-require 'utils/os'
+
 
 module Incrementers
     class RequestIncrementer
@@ -32,7 +32,7 @@ module Incrementers
             puts "original #{value}"
             value -= 1
             puts "increment#{value}"
-            File.open(@path, 'w') do |file|
+            File.open( @path, 'w' ) do |file|
                 file.write( value.to_s )
                 file.close
             end
@@ -40,15 +40,7 @@ module Incrementers
         end
 
         def get_increment_file_path
-            file_path = nil
-            if Utils::OS.mac?
-                file_path = FView::Config.read_config[:incrementer]['development']['increment_file_path']['osx']
-            elsif Utils::OS.windows?
-                file_path = FView::Config.read_config[:incrementer]['development']['increment_file_path']['windows']
-            elsif Utils::OS.linux?
-                file_path = FView::Config.read_config[:incrementer]['development']['increment_file_path']['linux']
-            end
-            file_path
+            FView::Config.read_config_by_key_value('incrementer', 'increment_file_path')
         end
     end
 end

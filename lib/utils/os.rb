@@ -15,5 +15,17 @@ module Utils
         def self.linux?
             unix? and not mac?
         end
+
+        def self.get_platform
+            if windows?
+                'windows'
+            elsif mac?
+                'osx'
+            elsif lunux?
+                'linux'
+            else
+                'unix'
+            end
+        end
     end
 end

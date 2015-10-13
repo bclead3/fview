@@ -6,3 +6,5 @@ Rails.application.initialize!
 
 Utils::Loader.new
 
+
+RAILS_ROOT = Rails.root
