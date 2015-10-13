@@ -1,7 +1,7 @@
 require 'erb'
 require 'utils/os'
 
-module FView
+module Parsers
     module Config
         def self.read_config
             args        = {}
@@ -24,8 +24,8 @@ module FView
             match_obj[2]
         end
 
-        def self.read_config_by_key_value( key_for_yaml, file_name )
-            FView::Config.read_config[key_for_yaml.to_sym][Rails.env][file_name][Utils::OS.get_platform]
+        def self.read_config_by_key_value( yaml_file_name, key_name )
+            read_config[yaml_file_name.to_sym][Rails.env][key_name][Utils::OS.get_platform]
         end
     end
 end

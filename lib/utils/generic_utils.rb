@@ -1,4 +1,5 @@
 require 'bigdecimal/math'
+require 'yaml'
 
 module Utils
     class GenericUtils
@@ -20,5 +21,11 @@ module Utils
             end
             sheet
         end
+        #
+        # def self.read_config_by_key_value( file_name_sym, key_value )
+        #     file_path = "#{Rails.root.to_s}/config/#{file_name_sym.to_s}.yml"
+        #     config = YAML.load_file(file_path)[Rails.env]
+        #     config[key_value][Utils::OS.get_platform]
+        # end
     end
 end
