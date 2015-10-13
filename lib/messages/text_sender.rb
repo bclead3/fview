@@ -1,5 +1,6 @@
 require 'sms_fu'
 require 'pony'
+require 'parsers/read_config'
 
 module Messages
     PONY_CONFIG = {
