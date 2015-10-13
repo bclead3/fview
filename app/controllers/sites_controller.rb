@@ -27,7 +27,7 @@ class SitesController < ApplicationController
         chars = params['chars']
         logger.debug "received an input of #{params['chars']}"
         if /(\d{3}|\D+)/.match( chars )
-            @site_array = Reports::SiteReport.get_site_from_chars(chars)
+            @site_array = Reports::SiteReport.get_site_from_chars( chars )
         else
             @site_array = []
         end

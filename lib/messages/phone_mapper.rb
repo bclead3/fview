@@ -8,22 +8,33 @@ module Messages
         @on_call_array
         @processed_array
 
-        def self.get_phone_number
+        def self.get_on_call_phone_number
             @phone_val ||= get_on_call_values[1]
         end
 
-        def self.get_carrier
+        def self.get_on_call_carrier
             @carrier   ||= get_on_call_values[2]
         end
 
-        #private
+        def self.get_on_call_carrier_address
+            on_call_carrier = get_on_call_carrier
+            return_value    = ''
+            carrier_array = Parsers::ProviderParser.process
+            carrier_array.each do |carrier_name, carrier_full_name, at_address|
+                if on_call_carrier == carrier_name
+                    return_value = at_address
+                    break
+                end
+            end
+            return_value
+        end
 
         def self.get_on_call_person
-            @on_call_person = IO.readlines( FView::Config.read_config_by_key_value(:messaging,'on_call_person_file_path') ).first
+            @on_call_person = IO.readlines( FView::Config.read_config_by_key_value( :messaging, 'on_call_person_file_path' ) ).first
         end
 
         def self.get_team_addresses
-            @on_call_array = IO.readlines( FView::Config.read_config_by_key_value(:messaging,'all_team_pager_addresses_file_path') )
+            @on_call_array = IO.readlines( FView::Config.read_config_by_key_value( :messaging, 'all_team_pager_addresses_file_path' ) )
         end
 
         def self.process_team_array
