@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20150218223306) do
 
   create_table "sites", force: :cascade do |t|
     t.integer  "site_num"
-    t.string   "site_name",     limit: 255
-    t.string   "telephone_num", limit: 255
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.string   "site_name"
+    t.string   "telephone_num"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end

@@ -16,11 +16,14 @@ module Parsers
                     site_name       = row_array[1]
                     telephone_num   = row_array[2]
 
-                    #puts "#{row_array[0]}  #{row_array[1]} #{row_array[2]}"
-                    site = Site.find_or_create_by(site_num: site_num)
-                    site.site_name      = site_name
-                    site.telephone_num  = telephone_num
-                    site.save!
+                    begin
+                        site = Site.find_or_create_by(site_num: site_num)
+                        site.site_name      = site_name
+                        site.telephone_num  = telephone_num
+                        site.save!
+                    rescue Exception => ex
+                        puts "#{row_array[0]}  #{row_array[1]} #{row_array[2]}"
+                    end                    
                 end
             end
 
