@@ -2,7 +2,7 @@ require 'erb'
 require 'utils/os'
 
 module Parsers
-    module Config
+    module ReadConfig
         def self.read_config
             args        = {}
             return_hash = {}

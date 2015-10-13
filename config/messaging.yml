@@ -1,17 +1,17 @@
 development:
   all_team_pager_addresses_file_path:
     osx: data_source/AllTeamPagerAddresses.txt
-    windows:
+    windows: data_source/AllTeamPagerAddresses.txt
     linux:
   on_call_person_file_path:
     osx: data_source/OnCallPerson.txt
-    windows:
+    windows: data_source/OnCallPerson.txt
     linux:
   key_file_path:
     osx: data_source/AppKey.txt
-    windows:
+    windows: data_source/AppKey.txt
     linux:
   vbs_script_file_path:
-    osx: C:\Users\IEUser\projects\MsgBox.vbs
-    windows:
+    osx: 
+    windows: C:\Users\IEUser\projects\MsgBox.vbs
     linux:

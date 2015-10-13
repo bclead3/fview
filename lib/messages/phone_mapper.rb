@@ -31,11 +31,11 @@ module Messages
         end
 
         def self.get_on_call_person
-            @on_call_person = IO.readlines( Parsers::Config.read_config_by_key_value( :messaging, 'on_call_person_file_path' ) ).first
+            @on_call_person = IO.readlines( Parsers::ReadConfig.read_config_by_key_value( :messaging, 'on_call_person_file_path' ) ).first
         end
 
         def self.get_team_addresses
-            @on_call_array = IO.readlines( Parsers::Config.read_config_by_key_value( :messaging, 'all_team_pager_addresses_file_path' ) )
+            @on_call_array = IO.readlines( Parsers::ReadConfig.read_config_by_key_value( :messaging, 'all_team_pager_addresses_file_path' ) )
         end
 
         def self.process_team_array
