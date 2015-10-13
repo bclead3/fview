@@ -40,7 +40,7 @@ module Incrementers
         end
 
         def get_increment_file_path
-            FView::Config.read_config_by_key_value('incrementer', 'increment_file_path')
+            Parsers::ReadConfig.read_config_by_key_value('incrementer', 'increment_file_path')
         end
     end
 end
