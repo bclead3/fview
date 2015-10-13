@@ -1,3 +1,5 @@
+require 'fview/config'
+
 module Parsers
     class KeyParser
         @key_value = nil
