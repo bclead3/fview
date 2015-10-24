@@ -1,6 +1,7 @@
 require 'sms_fu'
 require 'pony'
 require 'parsers/read_config'
+require 'incrementers/request_incrementer'
 
 module Messages
     PONY_CONFIG = {
@@ -38,10 +39,12 @@ module Messages
             user_message            = message_val ||= 'User Message.'
             on_call_person          = Messages::PhoneMapper.get_on_call_person
             key_value               = Parsers::KeyParser.get_key
+            increment_value         = Incrementers::RequestIncrementer.new.increment
             # cscript "Q:\System-Shares\Pharmacy\SHAREDIR\Retail Pharmacy Info\site scripts\Pager app\SendPageMessage.vbs" /a: "%username%" "%CellNumber%%PagerAddress%" "%Message1%" "%NameToPage%"
             # cscript "%MyPath%\SendPageMessageV2.vbs" /a: "%username%" "%OnCallPerson%@fairview.org" "%OnCallPerson%" "%Key% !pagecount!" "!MyMessage!"
             # cscript "%MyPath%\SendPageMessage.vbs" /a: "%username%" "%CellNumber%%PagerAddress%" "%PhoneNumber% Message: %Message%" "%OnCallPerson%" "%Key%"
-            total_message = "#{send_message_vbs_path} /a: #{username} #{cell_number}#{pager_address} #{user_phone_number} Message: #{user_message} #{on_call_person} #{key_value}"
+            total_message = "cscript #{send_message_vbs_path} /a: #{username} #{cell_number}@#{pager_address}  #{user_message} #{on_call_person} #{key_value}"
+            # cscript "%MyPath%\SendPageMessageV2.vbs" /a: "%username%" "%OnCallPerson%@fairview.org" "%OnCallPerson%" "%Key% !pagecount!" "!MyMessage!"
         end
 
         private
