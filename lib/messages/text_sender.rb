@@ -41,10 +41,9 @@ module Messages
             key_value               = Parsers::KeyParser.get_key
             increment_value         = Incrementers::RequestIncrementer.new.increment
             # cscript "Q:\System-Shares\Pharmacy\SHAREDIR\Retail Pharmacy Info\site scripts\Pager app\SendPageMessage.vbs" /a: "%username%" "%CellNumber%%PagerAddress%" "%Message1%" "%NameToPage%"
-            # cscript "%MyPath%\SendPageMessageV2.vbs" /a: "%username%" "%OnCallPerson%@fairview.org" "%OnCallPerson%" "%Key% !pagecount!" "!MyMessage!"
             # cscript "%MyPath%\SendPageMessage.vbs" /a: "%username%" "%CellNumber%%PagerAddress%" "%PhoneNumber% Message: %Message%" "%OnCallPerson%" "%Key%"
-            total_message = "cscript #{send_message_vbs_path} /a: #{username} #{cell_number}@#{pager_address}  #{user_message} #{on_call_person} #{key_value}"
             # cscript "%MyPath%\SendPageMessageV2.vbs" /a: "%username%" "%OnCallPerson%@fairview.org" "%OnCallPerson%" "%Key% !pagecount!" "!MyMessage!"
+            total_message = "cscript #{send_message_vbs_path} /a: #{username} #{cell_number}@#{pager_address} #{on_call_person} #{key_value} #{increment_value} #{user_message}"
         end
 
         private
