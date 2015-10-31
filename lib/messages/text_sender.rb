@@ -2,6 +2,7 @@ require 'sms_fu'
 require 'pony'
 require 'parsers/read_config'
 require 'incrementers/request_incrementer'
+require 'open3'
 
 module Messages
     PONY_CONFIG = {
@@ -43,7 +44,8 @@ module Messages
             # cscript "Q:\System-Shares\Pharmacy\SHAREDIR\Retail Pharmacy Info\site scripts\Pager app\SendPageMessage.vbs" /a: "%username%" "%CellNumber%%PagerAddress%" "%Message1%" "%NameToPage%"
             # cscript "%MyPath%\SendPageMessage.vbs" /a: "%username%" "%CellNumber%%PagerAddress%" "%PhoneNumber% Message: %Message%" "%OnCallPerson%" "%Key%"
             # cscript "%MyPath%\SendPageMessageV2.vbs" /a: "%username%" "%OnCallPerson%@fairview.org" "%OnCallPerson%" "%Key% !pagecount!" "!MyMessage!"
-            total_message = "cscript #{send_message_vbs_path} /a: #{username} #{cell_number}@#{pager_address} #{on_call_person} #{key_value} #{increment_value} #{user_message}"
+            total_message = "cscript #{send_message_vbs_path} /a: #{username} #{cell_number}#{pager_address} #{on_call_person} #{key_value} #{increment_value} \"#{user_message}\""
+            Open3.popen3( total_message )
         end
 
         private

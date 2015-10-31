@@ -16,7 +16,7 @@ module Messages
 
         # Messages::PhoneMapper.get_on_call_carrier
         def self.get_on_call_carrier
-            @carrier   ||= get_on_call_values[2]
+            @carrier   ||= get_on_call_values[2].strip.downcase
         end
 
         # Messages::PhoneMapper.get_on_call_carrier_address
@@ -25,7 +25,7 @@ module Messages
             return_value    = ''
             carrier_array = Parsers::ProviderParser.process
             carrier_array.each do |carrier_name, carrier_full_name, at_address|
-                if on_call_carrier == carrier_name
+                if on_call_carrier == carrier_name.downcase
                     return_value = at_address
                     break
                 end
