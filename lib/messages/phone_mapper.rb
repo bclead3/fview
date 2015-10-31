@@ -9,14 +9,17 @@ module Messages
         @on_call_array
         @processed_array
 
+        # Messages::PhoneMapper.get_on_call_phone_number
         def self.get_on_call_phone_number
             @phone_val ||= get_on_call_values[1]
         end
 
+        # Messages::PhoneMapper.get_on_call_carrier
         def self.get_on_call_carrier
             @carrier   ||= get_on_call_values[2]
         end
 
+        # Messages::PhoneMapper.get_on_call_carrier_address
         def self.get_on_call_carrier_address
             on_call_carrier = get_on_call_carrier
             return_value    = ''
