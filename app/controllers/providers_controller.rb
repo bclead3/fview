@@ -53,13 +53,13 @@ class ProvidersController < ApplicationController
 
   # DELETE /providers/1
   # DELETE /providers/1.json
-  def destroy
-    @provider.destroy
-    respond_to do |format|
-      format.html { redirect_to providers_url, notice: 'Provider was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @provider.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to providers_url, notice: 'Provider was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.

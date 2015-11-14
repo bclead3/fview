@@ -38,6 +38,7 @@ class SitesController < ApplicationController
         message_value   = params['message']
         puts "Ph:#{phone_value}    msg:#{message_value}"
         increment
+        Messages::TextSender.send( phone_value, message_value, @increment_var )
     end
 
     def increment
